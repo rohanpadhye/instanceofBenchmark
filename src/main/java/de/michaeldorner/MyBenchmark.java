@@ -32,6 +32,7 @@ public class MyBenchmark {
 
 	@Benchmark
 	public void measureINSTANCEOF() {
+		base.i = 1;
 		if (base instanceof A) {
 			((A) base).doA();
 		} else if (base instanceof B) {
@@ -53,11 +54,13 @@ public class MyBenchmark {
 		} else if (base instanceof J) {
 			((J) base).doJ();
 		}
+		assert base.i == -1;
 	}
 
 
 	@Benchmark
 	public void measureINSTANCEOF_interface() {
+		base.i = 1;
 		if (base instanceof CanA) {
 			((CanA) base).doA();
 		} else if (base instanceof CanB) {
@@ -79,15 +82,19 @@ public class MyBenchmark {
 		} else if (base instanceof CanJ) {
 			((CanJ) base).doJ();
 		}
+		assert base.i == -1;
 	}
 
 	@Benchmark
 	public void measureOO() {
+		base.i = 1;
 		base.doSomething();
+		assert base.i == -1;
 	}
 
 	// @Benchmark -- incorrect, because it does not consider chains of derivation
 	public void measureGETTYPE() {
+		base.i = 1;
 		switch (base.getType()) {
 			case A:
 				((A) base).doA();
@@ -122,10 +129,12 @@ public class MyBenchmark {
 			default:
 				break;
 		}
+		assert base.i == -1;
 	}
 
 	// @Benchmark -- incorrect, because it does not consider chains of derivation
 	public void measureTYPE() {
+		base.i = 1;
 		switch (base.type) {
 		case A:
 			((A) base).doA();
@@ -160,10 +169,12 @@ public class MyBenchmark {
 		default:
 			break;
 		}
+		assert base.i == -1;
 	}
 
 	@Benchmark
 	public void measureGETCLASS() {
+		base.i = 1;
 		if (A.class.isAssignableFrom(base.getClass())) {
 			((A) base).doA();
 		} else if (B.class.isAssignableFrom(base.getClass())) {
@@ -185,11 +196,13 @@ public class MyBenchmark {
 		} else if (J.class.isAssignableFrom(base.getClass())) {
 			((J) base).doJ();
 		}
+		assert base.i == -1;
 	}
 
 
 	@Benchmark
 	public void measureGETCLASS_interface() {
+		base.i = 1;
 		if (CanA.class.isAssignableFrom(base.getClass())) {
 			((CanA) base).doA();
 		} else if (B.class.isAssignableFrom(base.getClass())) {
@@ -211,5 +224,65 @@ public class MyBenchmark {
 		} else if (CanJ.class.isAssignableFrom(base.getClass())) {
 			((CanJ) base).doJ();
 		}
+		assert base.i == -1;
+	}
+
+	private static boolean sub(long type, long mix) {
+		return (type & mix) == type;
+	}
+
+	@Benchmark
+	public void measureINSTANCEOF_withTypeBits() {
+		base.i = 1;
+		if (sub(A.typeID, base.mix) && base instanceof A) {
+			((A) base).doA();
+		} else if (sub(B.typeID, base.mix) && base instanceof B) {
+			((B) base).doB();
+		} else if (sub(C.typeID, base.mix) && base instanceof C) {
+			((C) base).doC();
+		} else if (sub(D.typeID, base.mix) && base instanceof D) {
+			((D) base).doD();
+		} else if (sub(E.typeID, base.mix) && base instanceof E) {
+			((E) base).doE();
+		} else if (sub(F.typeID, base.mix) && base instanceof F) {
+			((F) base).doF();
+		} else if (sub(G.typeID, base.mix) && base instanceof G) {
+			((G) base).doG();
+		} else if (sub(H.typeID, base.mix) && base instanceof H) {
+			((H) base).doH();
+		} else if (sub(I.typeID, base.mix) && base instanceof I) {
+			((I) base).doI();
+		} else if (sub(J.typeID, base.mix) && base instanceof J) {
+			((J) base).doJ();
+		}
+		assert base.i == -1;
+	}
+
+
+	@Benchmark
+	public void measureINSTANCEOF_interface_withTypeBits() {
+		base.i = 1;
+		if (sub(CanA.typeID, base.mix) && base instanceof CanA) {
+			((A) base).doA();
+		} else if (sub(CanB.typeID, base.mix) && base instanceof CanB) {
+			((B) base).doB();
+		} else if (sub(CanC.typeID, base.mix) && base instanceof CanC) {
+			((C) base).doC();
+		} else if (sub(CanD.typeID, base.mix) && base instanceof CanD) {
+			((D) base).doD();
+		} else if (sub(CanE.typeID, base.mix) && base instanceof CanE) {
+			((E) base).doE();
+		} else if (sub(CanF.typeID, base.mix) && base instanceof CanF) {
+			((F) base).doF();
+		} else if (sub(CanG.typeID, base.mix) && base instanceof CanG) {
+			((G) base).doG();
+		} else if (sub(CanH.typeID, base.mix) && base instanceof CanH) {
+			((H) base).doH();
+		} else if (sub(CanI.typeID, base.mix) && base instanceof CanI) {
+			((I) base).doI();
+		} else if (sub(CanJ.typeID, base.mix) && base instanceof CanJ) {
+			((J) base).doJ();
+		}
+		assert base.i == -1;
 	}
 }

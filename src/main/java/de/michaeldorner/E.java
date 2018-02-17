@@ -1,8 +1,11 @@
 package de.michaeldorner;
 
 public class E extends F implements CanE {
+	static long typeID = TypeBits.freshID();
+	static long mixID = typeID | F.mixID | CanE.mixID;
 	public E() {
 		type = Type.E;
+		mix = mixID;
 	}
 
 	@Override

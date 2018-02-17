@@ -1,8 +1,11 @@
 package de.michaeldorner;
 
 public class J extends Base implements CanJ {
+	static long typeID = TypeBits.freshID();
+	static long mixID = typeID | Base.mixID | CanJ.mixID;
 	public J() {
 		type = Type.J;
+		mix = mixID;
 	}
 
 	@Override
