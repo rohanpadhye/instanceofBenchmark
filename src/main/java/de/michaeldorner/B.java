@@ -1,15 +1,11 @@
 package de.michaeldorner;
 
-public class B extends Base {
-	
+public class B extends C implements CanB {
 	public B() {
-		super(Type.B);
-	}
-	
-	public boolean isB() {
-		return true;
+		type = Type.B;
 	}
 
+	@Override
 	public void doB() {
 		i = i * -1;
 	}
@@ -18,4 +14,7 @@ public class B extends Base {
 	public void doSomething() {
 		i = i * -1;
 	}
+
+	@Override
+	public Type getType() { return Type.B; }
 }

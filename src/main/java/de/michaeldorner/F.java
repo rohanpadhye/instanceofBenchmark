@@ -1,15 +1,11 @@
 package de.michaeldorner;
 
-public class F extends Base {
-	
+public class F extends G implements CanF {
 	public F() {
-		super(Type.F);
+		type = Type.F;
 	}
-	
-	public boolean isF() {
-		return true;
-	}
-	
+
+	@Override
 	public void doF() {
 		i = i * -1;
 	}
@@ -18,4 +14,7 @@ public class F extends Base {
 	public void doSomething() {
 		i = i * -1;
 	}
+
+	@Override
+	public Type getType() { return Type.F; }
 }
