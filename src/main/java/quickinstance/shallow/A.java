@@ -22,4 +22,7 @@ public class A extends Base implements CanA {
 
 	@Override
 	public Type getType() { return Type.A; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

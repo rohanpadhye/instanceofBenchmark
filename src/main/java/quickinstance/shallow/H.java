@@ -22,4 +22,7 @@ public class H extends Base implements CanH {
 
 	@Override
 	public Type getType() { return Type.H; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

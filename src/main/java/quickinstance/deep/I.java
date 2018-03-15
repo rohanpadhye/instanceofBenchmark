@@ -22,4 +22,7 @@ public class I extends J implements CanI {
 
 	@Override
 	public Type getType() { return Type.I; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

@@ -22,5 +22,8 @@ public class C extends D implements CanC {
 
 	@Override
 	public Type getType() { return Type.C; }
+
+	@Override
+	public long getMix() { return mixID; }
 }
 

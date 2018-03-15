@@ -22,4 +22,7 @@ public class J extends Base implements CanJ {
 
 	@Override
 	public Type getType() { return Type.J; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

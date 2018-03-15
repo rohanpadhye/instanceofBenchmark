@@ -22,4 +22,7 @@ public class B extends C implements CanB {
 
 	@Override
 	public Type getType() { return Type.B; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

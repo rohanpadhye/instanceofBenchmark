@@ -22,5 +22,8 @@ public class C extends Base implements CanC {
 
 	@Override
 	public Type getType() { return Type.C; }
+
+	@Override
+	public long getMix() { return mixID; }
 }
 

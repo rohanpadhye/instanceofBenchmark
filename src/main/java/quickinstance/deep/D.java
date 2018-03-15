@@ -22,4 +22,7 @@ public class D extends E implements CanD {
 
 	@Override
 	public Type getType() { return Type.D; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

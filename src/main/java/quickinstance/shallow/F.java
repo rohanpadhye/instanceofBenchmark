@@ -22,4 +22,7 @@ public class F extends Base implements CanF {
 
 	@Override
 	public Type getType() { return Type.F; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

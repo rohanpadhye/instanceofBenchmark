@@ -17,4 +17,6 @@ public abstract class Base {
 	public abstract void doSomething();
 
 	public abstract Type getType();
+
+	public abstract long getMix();
 }

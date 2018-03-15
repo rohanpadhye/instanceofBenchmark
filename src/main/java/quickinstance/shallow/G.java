@@ -22,4 +22,7 @@ public class G extends Base implements CanG {
 
 	@Override
 	public Type getType() { return Type.G; }
+
+	@Override
+	public long getMix() { return mixID; }
 }

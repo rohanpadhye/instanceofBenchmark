@@ -34,7 +34,7 @@ public class DeepBenchmark {
 	}
 
 	@Benchmark
-	public void measureINSTANCEOF() {
+	public void measureINSTANCEOF_class() {
 		base.i = 1;
 		if (base instanceof A) {
 			((A) base).doA();
@@ -95,88 +95,8 @@ public class DeepBenchmark {
 		assert base.i == -1;
 	}
 
-	// @Benchmark -- incorrect, because it does not consider chains of derivation
-	public void measureGETTYPE() {
-		base.i = 1;
-		switch (base.getType()) {
-			case A:
-				((A) base).doA();
-				break;
-			case B:
-				((B) base).doB();
-				break;
-			case C:
-				((C) base).doC();
-				break;
-			case D:
-				((D) base).doD();
-				break;
-			case E:
-				((E) base).doE();
-				break;
-			case F:
-				((F) base).doF();
-				break;
-			case G:
-				((G) base).doG();
-				break;
-			case H:
-				((H) base).doH();
-				break;
-			case I:
-				((I) base).doI();
-				break;
-			case J:
-				((J) base).doJ();
-				break;
-			default:
-				break;
-		}
-		assert base.i == -1;
-	}
-
-	// @Benchmark -- incorrect, because it does not consider chains of derivation
-	public void measureTYPE() {
-		base.i = 1;
-		switch (base.type) {
-		case A:
-			((A) base).doA();
-			break;
-		case B:
-			((B) base).doB();
-			break;
-		case C:
-			((C) base).doC();
-			break;
-		case D:
-			((D) base).doD();
-			break;
-		case E:
-			((E) base).doE();
-			break;
-		case F:
-			((F) base).doF();
-			break;
-		case G:
-			((G) base).doG();
-			break;
-		case H:
-			((H) base).doH();
-			break;
-		case I:
-			((I) base).doI();
-			break;
-		case J:
-			((J) base).doJ();
-			break;
-		default:
-			break;
-		}
-		assert base.i == -1;
-	}
-
 	@Benchmark
-	public void measureGETCLASS() {
+	public void measureASSIGNABLE_class() {
 		base.i = 1;
 		if (A.class.isAssignableFrom(base.getClass())) {
 			((A) base).doA();
@@ -204,7 +124,7 @@ public class DeepBenchmark {
 
 
 	@Benchmark
-	public void measureGETCLASS_interface() {
+	public void measureASSIGNABLE_interface() {
 		base.i = 1;
 		if (CanA.class.isAssignableFrom(base.getClass())) {
 			((CanA) base).doA();
@@ -235,27 +155,28 @@ public class DeepBenchmark {
 	}
 
 	@Benchmark
-	public void measureINSTANCEOF_withTypeBits() {
+	public void measureINSTANCEOF_class_getMix() {
 		base.i = 1;
-		if (sub(A.typeID, base.mix) && base instanceof A) {
+		long mix = base.getMix();
+		if (sub(A.typeID, mix) && base instanceof A) {
 			((A) base).doA();
-		} else if (sub(B.typeID, base.mix) && base instanceof B) {
+		} else if (sub(B.typeID, mix) && base instanceof B) {
 			((B) base).doB();
-		} else if (sub(C.typeID, base.mix) && base instanceof C) {
+		} else if (sub(C.typeID, mix) && base instanceof C) {
 			((C) base).doC();
-		} else if (sub(D.typeID, base.mix) && base instanceof D) {
+		} else if (sub(D.typeID, mix) && base instanceof D) {
 			((D) base).doD();
-		} else if (sub(E.typeID, base.mix) && base instanceof E) {
+		} else if (sub(E.typeID, mix) && base instanceof E) {
 			((E) base).doE();
-		} else if (sub(F.typeID, base.mix) && base instanceof F) {
+		} else if (sub(F.typeID, mix) && base instanceof F) {
 			((F) base).doF();
-		} else if (sub(G.typeID, base.mix) && base instanceof G) {
+		} else if (sub(G.typeID, mix) && base instanceof G) {
 			((G) base).doG();
-		} else if (sub(H.typeID, base.mix) && base instanceof H) {
+		} else if (sub(H.typeID, mix) && base instanceof H) {
 			((H) base).doH();
-		} else if (sub(I.typeID, base.mix) && base instanceof I) {
+		} else if (sub(I.typeID, mix) && base instanceof I) {
 			((I) base).doI();
-		} else if (sub(J.typeID, base.mix) && base instanceof J) {
+		} else if (sub(J.typeID, mix) && base instanceof J) {
 			((J) base).doJ();
 		}
 		assert base.i == -1;
@@ -263,27 +184,84 @@ public class DeepBenchmark {
 
 
 	@Benchmark
-	public void measureINSTANCEOF_interface_withTypeBits() {
+	public void measureINSTANCEOF_interface_getMix() {
 		base.i = 1;
-		if (sub(CanA.typeID, base.mix) && base instanceof CanA) {
+		long mix = base.getMix();
+		if (sub(CanA.typeID, mix) && base instanceof CanA) {
 			((A) base).doA();
-		} else if (sub(CanB.typeID, base.mix) && base instanceof CanB) {
+		} else if (sub(CanB.typeID, mix) && base instanceof CanB) {
 			((B) base).doB();
-		} else if (sub(CanC.typeID, base.mix) && base instanceof CanC) {
+		} else if (sub(CanC.typeID, mix) && base instanceof CanC) {
 			((C) base).doC();
-		} else if (sub(CanD.typeID, base.mix) && base instanceof CanD) {
+		} else if (sub(CanD.typeID, mix) && base instanceof CanD) {
 			((D) base).doD();
-		} else if (sub(CanE.typeID, base.mix) && base instanceof CanE) {
+		} else if (sub(CanE.typeID, mix) && base instanceof CanE) {
 			((E) base).doE();
-		} else if (sub(CanF.typeID, base.mix) && base instanceof CanF) {
+		} else if (sub(CanF.typeID, mix) && base instanceof CanF) {
 			((F) base).doF();
-		} else if (sub(CanG.typeID, base.mix) && base instanceof CanG) {
+		} else if (sub(CanG.typeID, mix) && base instanceof CanG) {
 			((G) base).doG();
-		} else if (sub(CanH.typeID, base.mix) && base instanceof CanH) {
+		} else if (sub(CanH.typeID, mix) && base instanceof CanH) {
 			((H) base).doH();
-		} else if (sub(CanI.typeID, base.mix) && base instanceof CanI) {
+		} else if (sub(CanI.typeID, mix) && base instanceof CanI) {
 			((I) base).doI();
-		} else if (sub(CanJ.typeID, base.mix) && base instanceof CanJ) {
+		} else if (sub(CanJ.typeID, mix) && base instanceof CanJ) {
+			((J) base).doJ();
+		}
+		assert base.i == -1;
+	}
+	@Benchmark
+	public void measureINSTANCEOF_class_mix() {
+		base.i = 1;
+		long mix = base.mix;
+		if (sub(A.typeID, mix) && base instanceof A) {
+			((A) base).doA();
+		} else if (sub(B.typeID, mix) && base instanceof B) {
+			((B) base).doB();
+		} else if (sub(C.typeID, mix) && base instanceof C) {
+			((C) base).doC();
+		} else if (sub(D.typeID, mix) && base instanceof D) {
+			((D) base).doD();
+		} else if (sub(E.typeID, mix) && base instanceof E) {
+			((E) base).doE();
+		} else if (sub(F.typeID, mix) && base instanceof F) {
+			((F) base).doF();
+		} else if (sub(G.typeID, mix) && base instanceof G) {
+			((G) base).doG();
+		} else if (sub(H.typeID, mix) && base instanceof H) {
+			((H) base).doH();
+		} else if (sub(I.typeID, mix) && base instanceof I) {
+			((I) base).doI();
+		} else if (sub(J.typeID, mix) && base instanceof J) {
+			((J) base).doJ();
+		}
+		assert base.i == -1;
+	}
+
+
+	@Benchmark
+	public void measureINSTANCEOF_interface_mix() {
+		base.i = 1;
+		long mix = base.mix;
+		if (sub(CanA.typeID, mix) && base instanceof CanA) {
+			((A) base).doA();
+		} else if (sub(CanB.typeID, mix) && base instanceof CanB) {
+			((B) base).doB();
+		} else if (sub(CanC.typeID, mix) && base instanceof CanC) {
+			((C) base).doC();
+		} else if (sub(CanD.typeID, mix) && base instanceof CanD) {
+			((D) base).doD();
+		} else if (sub(CanE.typeID, mix) && base instanceof CanE) {
+			((E) base).doE();
+		} else if (sub(CanF.typeID, mix) && base instanceof CanF) {
+			((F) base).doF();
+		} else if (sub(CanG.typeID, mix) && base instanceof CanG) {
+			((G) base).doG();
+		} else if (sub(CanH.typeID, mix) && base instanceof CanH) {
+			((H) base).doH();
+		} else if (sub(CanI.typeID, mix) && base instanceof CanI) {
+			((I) base).doI();
+		} else if (sub(CanJ.typeID, mix) && base instanceof CanJ) {
 			((J) base).doJ();
 		}
 		assert base.i == -1;

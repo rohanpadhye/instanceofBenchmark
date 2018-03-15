@@ -22,4 +22,7 @@ public class E extends F implements CanE {
 
 	@Override
 	public Type getType() { return Type.E; }
+
+	@Override
+	public long getMix() { return mixID; }
 }
