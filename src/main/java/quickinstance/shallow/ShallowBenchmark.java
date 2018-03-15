@@ -279,25 +279,25 @@ public class ShallowBenchmark {
 		base.i = 1;
 		long mix = base.getMix();
 		if (sub(CanA.typeID, mix) && base instanceof CanA) {
-			((A) base).doA();
+			((CanA) base).doA();
 		} else if (sub(CanB.typeID, mix) && base instanceof CanB) {
-			((B) base).doB();
+			((CanB) base).doB();
 		} else if (sub(CanC.typeID, mix) && base instanceof CanC) {
-			((C) base).doC();
+			((CanC) base).doC();
 		} else if (sub(CanD.typeID, mix) && base instanceof CanD) {
-			((D) base).doD();
+			((CanD) base).doD();
 		} else if (sub(CanE.typeID, mix) && base instanceof CanE) {
-			((E) base).doE();
+			((CanE) base).doE();
 		} else if (sub(CanF.typeID, mix) && base instanceof CanF) {
-			((F) base).doF();
+			((CanF) base).doF();
 		} else if (sub(CanG.typeID, mix) && base instanceof CanG) {
-			((G) base).doG();
+			((CanG) base).doG();
 		} else if (sub(CanH.typeID, mix) && base instanceof CanH) {
-			((H) base).doH();
+			((CanH) base).doH();
 		} else if (sub(CanI.typeID, mix) && base instanceof CanI) {
-			((I) base).doI();
+			((CanI) base).doI();
 		} else if (sub(CanJ.typeID, mix) && base instanceof CanJ) {
-			((J) base).doJ();
+			((CanJ) base).doJ();
 		}
 		assert base.i == -1;
 	}
@@ -336,25 +336,25 @@ public class ShallowBenchmark {
 		base.i = 1;
 		long mix = base.mix;
 		if (sub(CanA.typeID, mix) && base instanceof CanA) {
-			((A) base).doA();
+			((CanA) base).doA();
 		} else if (sub(CanB.typeID, mix) && base instanceof CanB) {
-			((B) base).doB();
+			((CanB) base).doB();
 		} else if (sub(CanC.typeID, mix) && base instanceof CanC) {
-			((C) base).doC();
+			((CanC) base).doC();
 		} else if (sub(CanD.typeID, mix) && base instanceof CanD) {
-			((D) base).doD();
+			((CanD) base).doD();
 		} else if (sub(CanE.typeID, mix) && base instanceof CanE) {
-			((E) base).doE();
+			((CanE) base).doE();
 		} else if (sub(CanF.typeID, mix) && base instanceof CanF) {
-			((F) base).doF();
+			((CanF) base).doF();
 		} else if (sub(CanG.typeID, mix) && base instanceof CanG) {
-			((G) base).doG();
+			((CanG) base).doG();
 		} else if (sub(CanH.typeID, mix) && base instanceof CanH) {
-			((H) base).doH();
+			((CanH) base).doH();
 		} else if (sub(CanI.typeID, mix) && base instanceof CanI) {
-			((I) base).doI();
+			((CanI) base).doI();
 		} else if (sub(CanJ.typeID, mix) && base instanceof CanJ) {
-			((J) base).doJ();
+			((CanJ) base).doJ();
 		}
 		assert base.i == -1;
 	}
