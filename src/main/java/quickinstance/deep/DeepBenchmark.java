@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
 import org.openjdk.jmh.annotations.*;
 
 
@@ -266,4 +267,75 @@ public class DeepBenchmark {
 		}
 		assert base.i == -1;
 	}
+
+	private long mixCache[] = new long[1 << 16];
+
+	// Get b.getMix() without virtual methods using caching on class.hashCode()
+	private long mix(Base b) {
+		int hash = b.getClass().hashCode() >>> 16;
+		long theMix = mixCache[hash];
+		if (theMix == 0) {
+			theMix = b.getMix();
+			mixCache[hash] = theMix;
+		}
+		return theMix;
+	}
+
+	@Benchmark
+	public void measureINSTANCEOF_class_mixCache() {
+		base.i = 1;
+		long mix = mix(base);
+		if (sub(A.typeID, mix) && base instanceof A) {
+			((A) base).doA();
+		} else if (sub(B.typeID, mix) && base instanceof B) {
+			((B) base).doB();
+		} else if (sub(C.typeID, mix) && base instanceof C) {
+			((C) base).doC();
+		} else if (sub(D.typeID, mix) && base instanceof D) {
+			((D) base).doD();
+		} else if (sub(E.typeID, mix) && base instanceof E) {
+			((E) base).doE();
+		} else if (sub(F.typeID, mix) && base instanceof F) {
+			((F) base).doF();
+		} else if (sub(G.typeID, mix) && base instanceof G) {
+			((G) base).doG();
+		} else if (sub(H.typeID, mix) && base instanceof H) {
+			((H) base).doH();
+		} else if (sub(I.typeID, mix) && base instanceof I) {
+			((I) base).doI();
+		} else if (sub(J.typeID, mix) && base instanceof J) {
+			((J) base).doJ();
+		}
+		assert base.i == -1;
+	}
+
+	@Benchmark
+	public void measureINSTANCEOF_interface_mixCache() {
+		base.i = 1;
+		long mix = mix(base);
+		if (sub(CanA.typeID, mix) && base instanceof CanA) {
+			((CanA) base).doA();
+		} else if (sub(CanB.typeID, mix) && base instanceof CanB) {
+			((CanB) base).doB();
+		} else if (sub(CanC.typeID, mix) && base instanceof CanC) {
+			((CanC) base).doC();
+		} else if (sub(CanD.typeID, mix) && base instanceof CanD) {
+			((CanD) base).doD();
+		} else if (sub(CanE.typeID, mix) && base instanceof CanE) {
+			((CanE) base).doE();
+		} else if (sub(CanF.typeID, mix) && base instanceof CanF) {
+			((CanF) base).doF();
+		} else if (sub(CanG.typeID, mix) && base instanceof CanG) {
+			((CanG) base).doG();
+		} else if (sub(CanH.typeID, mix) && base instanceof CanH) {
+			((CanH) base).doH();
+		} else if (sub(CanI.typeID, mix) && base instanceof CanI) {
+			((CanI) base).doI();
+		} else if (sub(CanJ.typeID, mix) && base instanceof CanJ) {
+			((CanJ) base).doJ();
+		}
+		assert base.i == -1;
+	}
+
+
 }
