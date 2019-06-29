@@ -10,42 +10,27 @@ import java.util.Random;
  *
  * Each program class then has a unique type ID and a mix ID, which is a union of all typeIDs of
  * the classes and interfaces it extends/implements.
+ *
+ * The mix ID is essentially a bloom filter.
+ *
  */
 public class TypeBits {
 
-    private static final int ONES = 4;
+    private static final int BITS = 5;
     private static final int SIZE = 62;
-
-    private static final long[] POOL = new long[choose(SIZE, ONES)];
     private static final Random random = new Random();
 
-    static int factorial(int n) {
-        return n <= 0 ? 1 : (n * factorial(n-1));
-    }
-
-    static int bounded_factorial(int n, int terms) {
-        return terms == 0 ? 1 : (n * bounded_factorial(n-1, terms - 1));
-    }
-
-    static int choose(int n, int k) {
-        return bounded_factorial(n, k)/(factorial(k));
-    }
-
-    static {
-        long val = (1L << ONES) - 1;
-        long bound = (1L << SIZE) - 1;
-        int i = 0;
-        while (val <= bound) {
-            POOL[i++] = val;
-            long c = val & -val;
-            long r = val + c;
-            val = (((r^val) >> 2) / c) | r;
+    private static synchronized long createIDwithReplacement(int k) {
+        long result = 0;
+        for (int i = 0; i < k; i++) {
+            int bit = random.nextInt(SIZE);
+            result = result | (1L << bit);
         }
-        assert i == POOL.length;
+        return result;
     }
 
     public static synchronized long freshID() {
-        return POOL[random.nextInt(POOL.length)];
+        return createIDwithReplacement(BITS);
     }
 
     public static void main(String args[]) {
