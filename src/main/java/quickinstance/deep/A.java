@@ -2,15 +2,10 @@ package quickinstance.deep;
 
 import quickinstance.TypeBits;
 
-public class A extends B implements CanA {
+public class A extends B {
 	static long typeID = TypeBits.freshID();
-	static long mixID = typeID | B.mixID | CanA.mixID;
-	public A() {
-		type = Type.A;
-		mix = mixID;
-	}
+	static long mixID = typeID | B.mixID;
 
-	@Override
 	public void doA() {
 		i = i * -1;
 	}
@@ -19,9 +14,6 @@ public class A extends B implements CanA {
 	public void doSomething() {
 		i = i * -1;
 	}
-
-	@Override
-	public Type getType() { return Type.A; }
 
 	@Override
 	public long getMix() { return mixID; }

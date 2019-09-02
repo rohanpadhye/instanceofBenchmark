@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class TypeBits {
 
-    private static final int BITS = 5;
+    private static final int BITS = 3;
     private static final int SIZE = 62;
     private static final Random random = new Random();
 

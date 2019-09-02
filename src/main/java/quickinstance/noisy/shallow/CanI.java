@@ -1,4 +1,4 @@
-package quickinstance.deep;
+package quickinstance.noisy.shallow;
 
 import quickinstance.TypeBits;
 

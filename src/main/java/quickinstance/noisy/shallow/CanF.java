@@ -1,9 +1,9 @@
-package quickinstance.deep;
+package quickinstance.noisy.shallow;
 
 import quickinstance.TypeBits;
 
-public interface CanH {
+public interface CanF {
     static long typeID = TypeBits.freshID();
     static long mixID = typeID;
-    void doH();
+    void doF();
 }

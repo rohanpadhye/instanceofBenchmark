@@ -1,11 +1,21 @@
-package quickinstance.deep;
+package quickinstance.shallow;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
 
 
 @BenchmarkMode(Mode.AverageTime)
@@ -17,7 +27,7 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 10, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 @Fork(1)
 @State(Scope.Benchmark)
-public class DeepBenchmark {
+public class Evaluation10 {
 
 	private Base base;
 	private List<Base> classes = Arrays.asList(new A(), new B(), new C(), new D(), new E(), new F(), new G(), new H(), new I(), new J());;
@@ -30,34 +40,34 @@ public class DeepBenchmark {
 
 	@Setup(Level.Invocation)
 	public void setNewClass() {
-		int index = 2;//random.nextInt(classes.size());
+		int index = random.nextInt(classes.size());
 		base = classes.get(index);
 	}
 
 	@Benchmark
-	public void measureINSTANCEOF_class() {
+	public void baseline10() {
 		base.i = 1;
-		/* if (base instanceof A) {
-			((A) base).doA();
-		} else */ if (base instanceof B) {
-			((B) base).doB();
-		} /* else if (base instanceof C) {
-			((C) base).doC();
-		} else if (base instanceof D) {
-			((D) base).doD();
-		} else if (base instanceof E) {
-			((E) base).doE();
-		} else if (base instanceof F) {
-			((F) base).doF();
-		} else if (base instanceof G) {
-			((G) base).doG();
-		} else if (base instanceof H) {
-			((H) base).doH();
-		} else if (base instanceof I) {
-			((I) base).doI();
-		} */ else { base.i = -1; } /* if (base instanceof J) {
-			((J) base).doJ();
-		}*/
+		if (base instanceof CanA) {
+			((CanA) base).doA();
+		} else if (base instanceof CanB) {
+			((CanB) base).doB();
+		} else if (base instanceof CanC) {
+			((CanC) base).doC();
+		} else if (base instanceof CanD) {
+			((CanD) base).doD();
+		} else if (base instanceof CanE) {
+			((CanE) base).doE();
+		} else if (base instanceof CanF) {
+			((CanF) base).doF();
+		} else if (base instanceof CanG) {
+			((CanG) base).doG();
+		} else if (base instanceof CanH) {
+			((CanH) base).doH();
+		} else if (base instanceof CanI) {
+			((CanI) base).doI();
+		} else if (base instanceof CanJ) {
+			((CanJ) base).doJ();
+		}
 		assert base.i == -1;
 	}
 
@@ -66,7 +76,7 @@ public class DeepBenchmark {
 	}
 
 	@Benchmark
-	public void measureINSTANCEOF_class_getMix() {
+	public void failfast10() {
 		base.i = 1;
 		long mix = base.getMix();
 		if (sub(A.typeID, mix) && base instanceof A) {
@@ -92,7 +102,5 @@ public class DeepBenchmark {
 		}
 		assert base.i == -1;
 	}
-
-
 
 }
